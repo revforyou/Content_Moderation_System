@@ -21,9 +21,9 @@ link to their contributions in all repos here. -->
 | Name                            | Responsible for  | Link to their commits in this repo |
 |---------------------------------|----------------- |------------------------------------|
 | All team members                |                  |                                    |
-| Team member 1                   | Revanth Jyothula |                                    |
-| Team member 2                   | Krish Panchal    |                                    |
-| Team member 3                   | Gaurav Kuwar     |                                    |
+| Revanth Jyothula                | Model Training   |                                    |
+| Krish Panchal                   | Data Pipeline    |                                    |
+| Gaurav Kuwar                    | Model Serving    |                                    |
 
 
 
