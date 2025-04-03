@@ -1,7 +1,7 @@
 ## Smart AI-Based Content Moderation System
 
 #### Value Proposition
-Content moderation is a critical requirement for businesses that operate online platforms such as social media platforms (Facebook, Twitter, TikTok, etc.), e-commerce marketplaces (Amazon, eBay), discussion forums (Reddit, Quora), and video-sharing platforms (YouTube, Twitch). These businesses rely on ensuring that harmful, offensive, or illegal content is not published, thereby maintaining compliance with policies, protecting users, and preventing reputational damage.
+Content moderation is a critical requirement for businesses that operate online platforms such as social media platforms, e-commerce marketplaces, discussion forums, and video-sharing platforms. These businesses rely on ensuring that harmful, offensive, or illegal content is not published, thereby maintaining compliance with policies, protecting users, and preventing reputational damage. Our customer for this ML system is Finstagram.
 
 #### Current Status Quo (Non-ML Solution)
 Many companies still rely on manual moderation teams or rule-based automated filters to monitor and flag inappropriate content. However, these approaches face several challenges:
@@ -10,18 +10,16 @@ Many companies still rely on manual moderation teams or rule-based automated fil
 
 2. Scalability issues – As content volume grows, human moderation cannot keep up in real time.
 
-3. Inconsistency in decision-making: Different moderators may interpret rules differently, leading to inconsistencies.
+3. Inconsistency in decision-making: Different moderators may interpret rules differently, leading to inconsistencies and bias.
 
 4. Limited adaptability – Rule-based systems struggle with new types of harmful content, requiring constant manual updates.
 
 #### Business Metrics
 We will be judged on:
 
-Precision/Recall/F1 for flagging harmful content
+Hiring budget required for content moderation will go down.
 
-Moderation latency (response time < 2s)
-
-System uptime, model retrainability, and resource usage
+Latency will be less, so customer satisfaction will increase.
 
 
 ### Contributors
@@ -49,7 +47,7 @@ conditions under which it may be used. -->
 | Data set 1                  | Human-labeled dataset of hate speech and offensive text             |                   |
 | Data set 2                  | Human-labeled dataset of normal speech and normal text              |                   |
 | Base model 1 (Text)         | DistilBERT fine-tuned on hate/offensive data and normal data        |                   |
-| Base model 2 (Text)         | LSTM modelled and fine-tuned on hate/offensive data and normal data |                   |
+| Base model 2 (Text)         | LSTM modeled and fine-tuned on hate/offensive data and normal data |                   |
 
 
 ### Infrastructure Requirements  
