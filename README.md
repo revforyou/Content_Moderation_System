@@ -1,38 +1,42 @@
-## Content_Moderation_System
+## Smart AI-Based Content Moderation System
 
-<!-- 
-Discuss: Value proposition: Your will propose a machine learning system that can be 
-used in an existing business or service. (You should not propose a system in which 
-a new business or service would be developed around the machine learning system.) 
-Describe the value proposition for the machine learning system. What’s the (non-ML) 
-status quo used in the business or service? What business metric are you going to be 
-judged on? (Note that the “service” does not have to be for general users; you can 
-propose a system for a science problem, for example.)
--->
+#### Value Proposition
+Content moderation is a critical requirement for businesses that operate online platforms such as social media platforms (Facebook, Twitter, TikTok, etc.), e-commerce marketplaces (Amazon, eBay), discussion forums (Reddit, Quora), and video-sharing platforms (YouTube, Twitch). These businesses rely on ensuring that harmful, offensive, or illegal content is not published, thereby maintaining compliance with policies, protecting users, and preventing reputational damage.
+
+#### Current Status Quo (Non-ML Solution)
+Many companies still rely on manual moderation teams or rule-based automated filters to monitor and flag inappropriate content. However, these approaches face several challenges:
+
+1. High operational cost – Hiring and maintaining large teams of human moderators is expensive and inefficient.
+
+2. Scalability issues – As content volume grows, human moderation cannot keep up in real time.
+
+3. Inconsistency in decision-making: Different moderators may interpret rules differently, leading to inconsistencies.
+
+4. Limited adaptability – Rule-based systems struggle with new types of harmful content, requiring constant manual updates.
+
+#### Business Metrics
+We will be judged on:
+
+Precision/Recall/F1 for flagging harmful content
+
+Moderation latency (response time < 2s)
+
+System uptime, model retrainability, and resource usage
+
 
 ### Contributors
 
-<!-- Table of contributors and their roles. 
-First row: define responsibilities that are shared by the team. 
-Then, each row after that is: name of contributor, their role, and in the third column, 
-you will link to their contributions. If your project involves multiple repos, you will 
-link to their contributions in all repos here. -->
-
-| Name                            | Responsible for  | Link to their commits in this repo |
-|---------------------------------|----------------- |------------------------------------|
-| All team members                |                  |                                    |
-| Revanth Jyothula                | Model Training   |                                    |
-| Krish Panchal                   | Data Pipeline    |                                    |
-| Gaurav Kuwar                    | Model Serving    |                                    |
-
-
-
+| Name                            | Responsible for                                             | Link to their commits in this repo |
+|---------------------------------|-------------------------------------------------------------|------------------------------------|
+| All team members                | Design, training, cloud infrastructure, CI/CD, documentation|                                    |
+| Revanth Jyothula                | Model Training                                              |                                    |
+| Krish Panchal                   | Data Pipeline                                               |                                    |
+| Gaurav Kuwar                    | Model Serving                                               |                                    |
 
 ### System diagram
 
-<!-- Overall digram of system. Doesn't need polish, does need to show all the pieces. 
-Must include: all the hardware, all the containers/software platforms, all the models, 
-all the data. -->
+![image](https://github.com/user-attachments/assets/462df420-26af-4b75-b763-0a049bccd2d8)
+
 
 ### Summary of outside materials
 
@@ -40,49 +44,106 @@ all the data. -->
 Name of data/model, conditions under which it was created (ideally with links/references), 
 conditions under which it may be used. -->
 
-|              | How it was created | Conditions of use |
-|--------------|--------------------|-------------------|
-| Data set 1   |                    |                   |
-| Data set 2   |                    |                   |
-| Base model 1 |                    |                   |
-| etc          |                    |                   |
+|                             | How it was created                                                  | Conditions of use |
+|-----------------------------|---------------------------------------------------------------------|-------------------|
+| Data set 1                  | Human-labeled dataset of hate speech and offensive text             |                   |
+| Data set 2                  | Human-labeled dataset of normal speech and normal text              |                   |
+| Base model 1 (Text)         | DistilBERT fine-tuned on hate/offensive data and normal data        |                   |
+| Base model 2 (Text)         | LSTM modelled and fine-tuned on hate/offensive data and normal data |                   |
 
 
-### Summary of infrastructure requirements
+### Infrastructure Requirements  
 
-<!-- Itemize all your anticipated requirements: What (`m1.medium` VM, `gpu_mi100`), 
-how much/when, justification. Include compute, floating IPs, persistent storage. 
-The table below shows an example, it is not a recommendation. -->
+| Requirement       | How many/when                                     | Justification |
+|------------------|---------------------------------------------------|---------------|
+| `gpu_a100`      | 4-hour block, 3x per week (Weeks 3–5)             | High-speed training for text/image models (DistilBERT & MobileNetV2) with ONNX export |
+| `gpu_v100`      | 8-hour block, 2x per week (Weeks 6–8)             | Fine-tuning and inference benchmarking before deployment |
+| `gpu_t4`        | Always-on, 1 instance                             | Cost-effective real-time inference serving |
+| `m1.large` VMs  | 3 for entire project duration                     | API gateway, ONNX model serving, monitoring stack (Prometheus, Grafana, Loki) |
+| Floating IPs    | 1 for entire project duration, 1 for sporadic use | Main service access and staging deployments |
+| Persistent Volume (50GB) | Full duration                          | Stores training data, logs, model artifacts (MinIO for dataset versioning) |
+| Chameleon Blazar Reservations | As needed for scheduled GPU usage | Ensures compute availability for large batch training jobs |
+| Kubernetes Cluster (3 nodes) | Full duration                        | Containerized inference deployment with ArgoCD for autoscaling |
 
-| Requirement     | How many/when                                     | Justification |
-|-----------------|---------------------------------------------------|---------------|
-| `m1.medium` VMs | 3 for entire project duration                     | ...           |
-| `gpu_mi100`     | 4 hour block twice a week                         |               |
-| Floating IPs    | 1 for entire project duration, 1 for sporadic use |               |
-| etc             |                                                   |               |
 
 ### Detailed design plan
 
-<!-- In each section, you should describe (1) your strategy, (2) the relevant parts of the 
-diagram, (3) justification for your strategy, (4) relate back to lecture material, 
-(5) include specific numbers. -->
-
 #### Model training and training platforms
 
-<!-- Make sure to clarify how you will satisfy the Unit 4 and Unit 5 requirements, 
-and which optional "difficulty" points you are attempting. -->
+Strategy: Fine-tune existing models (DistilBERT for text, MobileNetV2 for image) on curated moderation datasets.
+
+Diagram section: Training scripts → ONNX converter → model registry.
+
+Platform: Chameleon Cloud w/ gpu_a100 for training.
+
+Justification: Reduces compute cost by leveraging transfer learning.
+
+MLOps link: Use MLflow to track experiments, metrics, and versions.
+
+#### Difficulty points attempted:
+
+Use of multiple model types (text + vision).
+
+Conversion to ONNX for cross-platform serving
 
 #### Model serving and monitoring platforms
 
-<!-- Make sure to clarify how you will satisfy the Unit 6 and Unit 7 requirements, 
-and which optional "difficulty" points you are attempting. -->
+Strategy: Serve ONNX models using FastAPI + onnxruntime in lightweight containers.
+
+Diagram section: Serving pods, API Gateway, Prometheus integration.
+
+Justification: It ensures modularity, minimal latency, and GPU-optional inference.
+
+Platform: Chameleon m1.medium VMs + Docker + ArgoCD for deployment.
+
+Monitoring: Prometheus + Grafana dashboards; logs collected with Loki.
+
+#### Difficulty points attempted:
+
+Multi-model, multi-modal inference.
+
+Metrics dashboard with latency/F1 monitoring.
+
+Live performance testing under load.
+
+
 
 #### Data pipeline
 
-<!-- Make sure to clarify how you will satisfy the Unit 8 requirements,  and which 
-optional "difficulty" points you are attempting. -->
+Strategy:
+
+Store incoming moderation requests in PostgreSQL.
+
+Store training datasets in MinIO buckets (S3-compatible).
+
+Use data versioning tools (DVC, optionally).
+
+Diagram section: Ingest pipeline → storage → model trainer.
+
+Justification: Enables retraining pipelines + audit trails.
+
+#### Difficulty points attempted:
+
+Intermediate data staging in pipeline.
+
+Data reuse for retraining/evaluation cycles.
 
 #### Continuous X
 
-<!-- Make sure to clarify how you will satisfy the Unit 3 requirements,  and which 
-optional "difficulty" points you are attempting. -->
+Strategy:
+
+CI: GitHub Actions runs model tests, ONNX conversion, and image builds.
+
+CD: ArgoCD triggers deployment on Chameleon after model pass.
+
+Monitoring: Slack notifications on model failure or deploy failure.
+
+Diagram section: CI/CD box + integration with version control.
+
+Justification: It promotes automation and reproducibility.
+
+#### Difficulty points attempted:
+
+Full CI/CD loop for model and system infra.
+
+Canary-style staged deployment with ArgoCD (QA → Prod).
