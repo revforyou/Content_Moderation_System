@@ -1,7 +1,7 @@
 ## Smart AI-Based Content Moderation System
 
 #### Value Proposition
-Content moderation is a critical requirement for businesses that operate online platforms such as social media platforms, e-commerce marketplaces, discussion forums, and video-sharing platforms. These businesses rely on ensuring that harmful, offensive, or illegal content is not published, thereby maintaining compliance with policies, protecting users, and preventing reputational damage. Our customer for this ML system is Finstagram.
+Content moderation is a critical requirement for businesses that operate online platforms such as social media platforms, e-commerce marketplaces, discussion forums, and video-sharing platforms. These businesses ensure that harmful, offensive, or illegal content is not published, thereby maintaining compliance with policies, protecting users, and preventing reputational damage. 
 
 #### Current Status Quo (Non-ML Solution)
 Many companies still rely on manual moderation teams or rule-based automated filters to monitor and flag inappropriate content. However, these approaches face several challenges:
@@ -14,10 +14,19 @@ Many companies still rely on manual moderation teams or rule-based automated fil
 
 4. Limited adaptability – Rule-based systems struggle with new types of harmful content, requiring constant manual updates.
 
+Our AI-powered Content Moderation System leverages Deep Learning & NLP to automate moderation across text, images, and videos, ensuring:
+Scalability – Can handle millions of content pieces in real time.
+Consistency – This removes human bias from decision-making.
+Faster Response Time – Immediate flagging of harmful content.
+Adaptive Learning – Model continuously improves using feedback from moderators.
+Multi-Modal Analysis – Supports text, image, and video content moderation.
+
+This system is designed to be cloud-native, scalable, and compliant with content policies, making it ideal for social media platforms, online forums, and enterprise collaboration tools.
+
 #### Business Metrics
 We will be judged on:
 
-Hiring budget required for content moderation will go down.
+The hiring budget required for content moderation will go down.
 
 Latency will be less, so customer satisfaction will increase.
 
