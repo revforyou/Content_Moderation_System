@@ -63,8 +63,8 @@ conditions under which it may be used. -->
 
 | Requirement       | How many/when                                     | Justification |
 |------------------|---------------------------------------------------|---------------|
-| `gpu_a100`      | 4-hour block, 3x per week (Weeks 3–5)             | High-speed training for text/image models (DistilBERT & MobileNetV2) with ONNX export |
-| `gpu_v100`      | 8-hour block, 2x per week (Weeks 6–8)             | Fine-tuning and inference benchmarking before deployment |
+| `gpu_a100`      | 4-hour block, 3x per week              | High-speed training for text/image models (DistilBERT & MobileNetV2) with ONNX export |
+| `gpu_v100`      | 8-hour block, 2x per week             | Fine-tuning and inference benchmarking before deployment |
 | `gpu_t4`        | Always-on, 1 instance                             | Cost-effective real-time inference serving |
 | `m1.large` VMs  | 3 for entire project duration                     | API gateway, ONNX model serving, monitoring stack (Prometheus, Grafana, Loki) |
 | Floating IPs    | 1 for entire project duration, 1 for sporadic use | Main service access and staging deployments |
