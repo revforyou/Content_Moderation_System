@@ -96,14 +96,6 @@ Platform: Chameleon m1.medium VMs + Docker + ArgoCD for deployment.
 
 Monitoring: Prometheus + Grafana dashboards; logs collected with Loki.
 
-#### Difficulty points attempted:
-
-Multi-model, multi-modal inference.
-
-Metrics dashboard with latency/F1 monitoring.
-
-Live performance testing under load.
-
 
 
 #### Data pipeline
@@ -140,8 +132,4 @@ Diagram section: CI/CD box + integration with version control.
 
 Justification: It promotes automation and reproducibility.
 
-#### Difficulty points attempted:
 
-Full CI/CD loop for model and system infra.
-
-Canary-style staged deployment with ArgoCD (QA → Prod).
