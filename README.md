@@ -59,7 +59,7 @@ conditions under which it may be used. -->
 | Base model 2 (Text)         | LSTM modeled and fine-tuned on hate/offensive data and normal data |                   |
 
 
-### Infrastructure Requirements  
+### Planned Infrastructure Requirements  
 
 | Requirement       | How many/when                                     | Justification |
 |------------------|---------------------------------------------------|---------------|
