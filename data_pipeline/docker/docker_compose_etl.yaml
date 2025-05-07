@@ -1,1 +1,100 @@
+name: jigsaw-etl
 
+volumes:
+  jigsaw_data:
+
+services:
+    extract-data:
+    container_name: etl_extract_data
+    image: python:3.11
+    user: root
+    volumes:
+      - jigsaw_data:/data
+      - ./kaggle.json:/root/.kaggle/kaggle.json:ro
+    working_dir: /data
+    environment:
+      - KAGGLE_CONFIG_DIR=/root/.kaggle
+    command:
+      - bash
+      - -c
+      - |
+        set -e
+
+        echo "Installing dependencies..."
+        pip install kaggle unzip
+
+        echo "Resetting Jigsaw directory..."
+        rm -rf Jigsaw
+        mkdir -p Jigsaw
+        cd Jigsaw
+
+        echo "Downloading dataset from Kaggle..."
+        kaggle competitions download -c jigsaw-unintended-bias-in-toxicity-classification
+
+        echo "Unzipping dataset..."
+        unzip -q train.csv.zip
+        unzip -q test.csv.zip
+        rm -f *.zip
+
+        echo "Final contents of /data/Jigsaw:"
+        ls -lh
+
+
+  transform-data:
+    container_name: etl_transform_data
+    image: python:3.11
+    volumes:
+      - jigsaw_data:/data
+    working_dir: /data/Jigsaw
+    command:
+      - bash
+      - -c
+      - |
+        set -e
+        pip install pandas
+
+        echo "Splitting dataset by timestamp..."
+        python3 -c '
+import pandas as pd
+from sklearn.model_selection import train_test_split
+
+df = pd.read_csv("train.csv", usecols=["comment_text", "target", "created_date"])
+df["created_date"] = pd.to_datetime(df["created_date"])
+df = df.sort_values("created_date")
+
+split_index = int(len(df) * 0.9)
+train_val = df.iloc[:split_index]
+production = df.iloc[split_index:]
+
+train, val = train_test_split(train_val, test_size=0.1111, random_state=42)
+
+train.to_csv("train.csv", index=False)
+val.to_csv("val.csv", index=False)
+production.to_csv("production.csv", index=False)
+        '
+
+        echo "Done splitting. Final files:"
+        ls -l
+
+  load-data:
+    container_name: etl_load_data
+    image: rclone/rclone:latest
+    volumes:
+      - jigsaw_data:/data
+      - ~/.config/rclone/rclone.conf:/root/.config/rclone/rclone.conf:ro
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - |
+        if [ -z "$RCLONE_CONTAINER" ]; then
+          echo "ERROR: RCLONE_CONTAINER is not set"
+          exit 1
+        fi
+
+        echo "Uploading to object storage bucket: $RCLONE_CONTAINER"
+        rclone copy /data/Jigsaw chi_uc:$RCLONE_CONTAINER \
+        --progress --transfers=16 --checkers=8 \
+        --multi-thread-streams=4 --fast-list
+
+        echo "Files in bucket:"
+        rclone lsf chi_uc:$RCLONE_CONTAINER
