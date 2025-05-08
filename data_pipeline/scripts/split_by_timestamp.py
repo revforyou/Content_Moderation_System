@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 df = pd.read_csv("train.csv", usecols=["comment_text", "target", "created_date"])
-df["created_date"] = pd.to_datetime(df["created_date"])
+df["created_date"] = pd.to_datetime(df["created_date"], format='mixed')
 df = df.sort_values("created_date")
 
 split_index = int(len(df) * 0.9)
