@@ -53,7 +53,7 @@ services:
         pip install pandas scikit-learn
 
         echo "Splitting dataset by timestamp..."
-        python3 -c '
+        python3 <<EOF
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
@@ -70,7 +70,7 @@ train, val = train_test_split(train_val, test_size=0.1111, random_state=42)
 train.to_csv("train.csv", index=False)
 val.to_csv("val.csv", index=False)
 production.to_csv("production.csv", index=False)
-        '
+EOF
 
         echo "Done splitting. Final files:"
         ls -l
