@@ -32,8 +32,8 @@ services:
         kaggle competitions download -c jigsaw-unintended-bias-in-toxicity-classification
 
         echo "Unzipping dataset..."
-        unzip -q train.csv.zip
-        unzip -q test.csv.zip
+        unzip -q jigsaw-unintended-bias-in-toxicity-classification.zip
+        rm -f jigsaw-unintended-bias-in-toxicity-classification.zip
         rm -f *.zip
 
         echo "Final contents of /data/Jigsaw:"
