@@ -4,7 +4,7 @@ volumes:
   jigsaw_data:
 
 services:
-    extract-data:
+  extract-data:
     container_name: etl_extract_data
     image: python:3.11
     user: root
