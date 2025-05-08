@@ -75,9 +75,9 @@ services:
         fi
 
         echo "Uploading to object storage bucket: $RCLONE_CONTAINER"
-        rclone copy /data/Jigsaw chi_uc:$RCLONE_CONTAINER \
+        rclone copy /data/Jigsaw chi_tacc:$RCLONE_CONTAINER \
         --progress --transfers=16 --checkers=8 \
         --multi-thread-streams=4 --fast-list
 
         echo "Files in bucket:"
-        rclone lsf chi_uc:$RCLONE_CONTAINER
+        rclone lsf chi_tacc:$RCLONE_CONTAINER
