@@ -10,7 +10,7 @@ services:
     user: root
     volumes:
       - jigsaw_data:/data
-      - ./kaggle.json:/root/.kaggle/kaggle.json:ro
+      - /home/cc/.kaggle/kaggle.json:/root/.kaggle/kaggle.json:ro
     working_dir: /data
     environment:
       - KAGGLE_CONFIG_DIR=/root/.kaggle
