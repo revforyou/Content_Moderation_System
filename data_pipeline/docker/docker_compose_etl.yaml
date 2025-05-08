@@ -39,7 +39,6 @@ services:
         echo "Final contents of /data/Jigsaw:"
         ls -lh
 
-
   transform-data:
     container_name: etl_transform_data
     image: python:3.11
@@ -51,7 +50,7 @@ services:
       - -c
       - |
         set -e
-        pip install pandas
+        pip install pandas scikit-learn
 
         echo "Splitting dataset by timestamp..."
         python3 -c '
