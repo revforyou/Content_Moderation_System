@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Toxic Comment Classifier</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 40px; }
+        h1 { color: #333; }
+        .input-section { color: green; font-weight: bold; margin-top: 20px; }
+        textarea { width: 100%; height: 100px; margin-top: 10px; padding: 10px; }
+        button { background-color: grey; color: white; padding: 10px 20px; margin-top: 10px; border: none; cursor: pointer; }
+        .output { background: #fff; padding: 20px; margin-top: 20px; border-radius: 8px; }
+        .bar-container { display: flex; height: 25px; margin-top: 10px; }
+        .bar-green { background-color: green; }
+        .bar-red { background-color: red; }
+    </style>
+</head>
+<body>
+
+    <h1>Toxic Comment Classifier</h1>
+
+    <form method="post">
+        <div class="input-section">Enter a comment:</div>
+        <textarea name="comment" required></textarea>
+        <br>
+        <button type="submit">Predict Text</button>
+    </form>
+
+    {% if result %}
+    <div class="output">
+        <p><strong>The entered text was:</strong> "{{ result.text }}"</p>
+        <p><strong>Predicted class:</strong> {{ result.pred_class }}</p>
+        <p><strong>Possible Labels:</strong></p>
+        <ul>
+            {% for label, score in result.subtypes.items() %}
+            <li>{{ label }}: {{ score }}%</li>
+            {% endfor %}
+        </ul>
+        <p><strong>Toxicity Level:</strong> {{ result.toxicity }}%</p>
+        <div class="bar-container">
+            <div class="bar-green" style="width: {{ result.appropriate_bar }}%"></div>
+            <div class="bar-red" style="width: {{ result.inappropriate_bar }}%"></div>
+        </div>
+    </div>
+    {% endif %}
+
+</body>
+</html>
