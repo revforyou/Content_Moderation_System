@@ -1,5 +1,4 @@
 apiVersion: v2
-name: gourmetgram-production
+name: content-moderation-production
 version: 1.0.0
-description: Gourmetgram Production Deployment
-
+description: Content Moderation Inference Service - Production Deployment
