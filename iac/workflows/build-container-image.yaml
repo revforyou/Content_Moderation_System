@@ -57,15 +57,13 @@ spec:
         - |
           MAX_RETRIES=5
           i=1
-
           while [ $i -le $MAX_RETRIES ]; do
             echo "Attempt $i of $MAX_RETRIES: Cloning repo..."
-            git clone --branch workflow https://github.com/teaching-on-testbeds/gourmetgram.git /mnt/workspace && break
+            git clone --branch workflow https://github.com/revforyou/Content_Moderation_System.git /mnt/workspace && break
             echo "Git clone failed. Retrying in 5 seconds..."
             i=$((i + 1))
             sleep 5
           done
-
           if [ ! -d /mnt/workspace/.git ]; then
             echo "Git clone failed after $MAX_RETRIES attempts."
             exit 1
@@ -84,22 +82,19 @@ spec:
       args:
         - |
           pip install mlflow-skinny
-          export MLFLOW_TRACKING_URI=http://mlflow.gourmetgram-platform.svc.cluster.local:8000
+          export MLFLOW_TRACKING_URI=http://mlflow.content-moderation-platform.svc.cluster.local:8000
           mkdir -p /tmp/mlflow_model
-
           echo "Downloading MLflow model artifacts..."
           mlflow artifacts download \
-            --artifact-uri models:/GourmetGramFood11Model/{{inputs.parameters.model-version}} \
+            --artifact-uri models:/ContentModerationModel/{{inputs.parameters.model-version}} \
             -d /tmp/mlflow_model || { echo "MLflow download failed"; exit 1; }
-
           echo "Searching for model.pth..."
           FOUND=$(find /tmp/mlflow_model/data -name model.pth | head -n 1)
           if [ -z "$FOUND" ]; then
             echo "ERROR: model.pth not found in MLflow artifacts"; exit 1
           fi
-
-          echo "Copying model.pth to app/ as food11.pth..."
-          cp "$FOUND" /mnt/workspace/food11.pth
+          echo "Copying model.pth to app/ as moderation_model.pth..."
+          cp "$FOUND" /mnt/workspace/moderation_model.pth
           echo "1.0.{{inputs.parameters.model-version}}" > /mnt/workspace/versions.txt
       volumeMounts:
       - name: workdir
@@ -117,7 +112,7 @@ spec:
       args:
         - --dockerfile=/mnt/workspace/Dockerfile
         - --context=/mnt/workspace
-        - --destination=registry.kube-system.svc.cluster.local:5000/gourmetgram-app:staging-1.0.{{inputs.parameters.model-version}}
+        - --destination=registry.kube-system.svc.cluster.local:5000/moderation-app:staging-1.0.{{inputs.parameters.model-version}}
         - --insecure
       volumeMounts:
       - name: workdir
@@ -132,9 +127,9 @@ spec:
       command: [sh, -c]
       source: |
         pip install mlflow-skinny > /dev/null
-        export MLFLOW_TRACKING_URI=http://mlflow.gourmetgram-platform.svc.cluster.local:8000
-        python -c "import mlflow; client = mlflow.tracking.MlflowClient(); client.set_registered_model_alias(name='GourmetGramFood11Model', alias='staging', version='{{inputs.parameters.model-version}}')"
-  
+        export MLFLOW_TRACKING_URI=http://mlflow.content-moderation-platform.svc.cluster.local:8000
+        python -c "import mlflow; client = mlflow.tracking.MlflowClient(); client.set_registered_model_alias(name='ContentModerationModel', alias='staging', version='{{inputs.parameters.model-version}}')"
+
   - name: trigger-deploy
     inputs:
       parameters:
