@@ -2,13 +2,12 @@ all:
   vars:
     ansible_python_interpreter: /usr/bin/python3
   hosts:
-    node1:
+    node-data:
       ansible_host: 192.168.1.11
       ansible_user: cc
-    node2:
+    node-infer:
       ansible_host: 192.168.1.12
       ansible_user: cc
-    node3:
+    node-monitor:
       ansible_host: 192.168.1.13
       ansible_user: cc
-
