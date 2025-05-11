@@ -2,21 +2,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: content-moderation-api
+  name: content-moderation-system
   namespace: content-moderation-canary
 
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: content-moderation-api
+      app: content-moderation-system
   template:
     metadata:
       labels:
-        app: content-moderation-api
+        app: content-moderation-system
     spec:
       containers:
-        - name: content-moderation-api
+        - name: content-moderation-system
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           ports:
             - containerPort: 8000
@@ -27,11 +27,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: content-moderation-api
+  name: content-moderation-system
   namespace: content-moderation-canary
 spec:
   selector:
-    app: content-moderation-api
+    app: content-moderation-system
   ports:
     - port: {{ .Values.service.port }}
       targetPort: 8000
