@@ -34,4 +34,10 @@ data "openstack_networking_secgroup_v2" "allow_9090" {
   name = "allow-9090"
 }
 
+data "openstack_networking_secgroup_v2" "allow_8888" {
+  name = "allow-8888"
+}
 
+data "openstack_networking_secgroup_v2" "allow_9000" {
+  name = "allow-9000"
+}
