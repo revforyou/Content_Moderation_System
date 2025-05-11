@@ -2,6 +2,7 @@ variable "suffix" {
   description = "Suffix for resource names (use net ID)"
   type        = string
   nullable    = false
+default     = "project26"
 }
 
 variable "key" {
@@ -13,9 +14,8 @@ variable "key" {
 variable "nodes" {
   type = map(string)
   default = {
-    "node-data"    = "192.168.1.11"
-    "node-monitor" = "192.168.1.12"
-    "node-train"   = "192.168.1.13"
-    "node-infer"   = "192.168.1.14"
+    "node1"    = "192.168.1.11"
+    "node2" = "192.168.1.12"
+    "node3"   = "192.168.1.13"
   }
 }
