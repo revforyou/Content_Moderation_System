@@ -39,9 +39,8 @@ spec:
         i=1
         INSTALL_SUCCESS=0
 
-        set +e  # allow manual error handling
+        set +e
 
-        # Retry installation
         while [ $i -le $MAX_RETRIES ]; do
           echo "[INFO] Attempt $i to install curl and jq..." >&2
           apk update > /dev/null 2>&1
@@ -57,27 +56,24 @@ spec:
           i=$((i + 1))
         done
 
-        set -e  # return to fail-fast mode
+        set -e
 
         if [ $INSTALL_SUCCESS -ne 1 ]; then
           echo "[ERROR] Failed to install curl and jq after $MAX_RETRIES attempts." >&2
           exit 1
         fi
 
-        # Trigger model training
         echo "[INFO] Triggering model training..." >&2
         RESPONSE=$(curl -f -s -X POST http://{{inputs.parameters.endpoint-ip}}:9090/trigger-training)
         CURL_EXIT_CODE=$?
 
         echo "[INFO] Training endpoint response was: $RESPONSE" >&2
 
-
         if [ $CURL_EXIT_CODE -ne 0 ]; then
           echo "[ERROR] curl failed with code $CURL_EXIT_CODE" >&2
           exit $CURL_EXIT_CODE
         fi
 
-        # Extract model version
         VERSION=$(echo "$RESPONSE" | jq -r '.new_model_version // empty')
 
         if [ -z "$VERSION" ]; then
