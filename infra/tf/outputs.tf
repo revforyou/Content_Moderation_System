@@ -1,3 +1,4 @@
-output "vm_name" {
-  value = openstack_compute_instance_v2.node_data.name
+output "floating_ip_out" {
+  description = "Floating IP assigned to node1"
+  value       = openstack_networking_floatingip_v2.floating_ip.address
 }
