@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  jupyter:
+    image: mlops-train:latest  # replace with your custom image name if built
+    container_name: jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - /mnt/block-persist:/home/jovyan/work  # mount your Chameleon volume
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    command: start-notebook.sh
