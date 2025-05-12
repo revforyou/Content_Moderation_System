@@ -7,6 +7,17 @@ resource "openstack_objectstorage_container_v1" "persist_container" {
   }
 }
 
+resource "openstack_blockstorage_volume_v3" "mlops_volume" {
+  name        = "block-persist-project26"
+  size        = 5 
+  volume_type = "default"
+  metadata = {
+    purpose = "ml-artifacts"
+    env     = "project26"
+  }
+}
+
+
 resource "openstack_networking_network_v2" "private_net" {
   name                  = "private-net-mlops-${var.suffix}"
   port_security_enabled = false
