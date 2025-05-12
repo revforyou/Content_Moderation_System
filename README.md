@@ -29,6 +29,7 @@ This system is designed to be cloud-native, scalable, and compliant with content
 #### Business Metrics
 
 Reduce moderation team size (cost savings)
+
 Improve moderation latency (increase user satisfaction)
 
 
@@ -85,6 +86,7 @@ The comments in this dataset come from an archive of the Civil Comments platform
 Strategy:
 The project focuses on detecting toxic comments in social media using a fine-tuned transformer-based language model. It integrates real-time and batch pipelines for data ingestion, model retraining, and deployment using MLOps best practices. We simulate production traffic to mimic a live environment, ensuring a realistic model deployment and feedback loop. The model is retrained weekly using the latest labeled and production data, with versioning and promotion handled via Argo Workflows and MLflow.
 
+
 Relevant Parts of the Diagram:
 
 Model Training & Retraining: Scheduled weekly using Ray and tracked via MLflow
@@ -94,6 +96,7 @@ CI/CD Deployment: Argo Workflows automate container image build, test, and Helm-
 Serving: Inference API served on Kubernetes via FastAPI container
 Online Data Simulation: Python script streams production.csv to the REST endpoint
 Monitoring & Feedback Loop: Production predictions can be routed for re-labeling and used in retraining
+
 
 Justification for Strategy:
 
@@ -105,29 +108,30 @@ Argo Workflows: Modular, repeatable automation for training, promotion, and depl
 Ray Train: Enables multi-node distributed training with built-in fault tolerance
 Canary + Staging + Prod: Follows industry-standard CI/CD for safe deployment transitions
 
-Unit 1: 
 
-Unit 2 – Cloud Computing: We used Chameleon Cloud’s KVM@TACC for provisioning four nodes and persistent volumes. Object store was accessed via RClone.
+Unit 2 – Cloud Computing: We used Chameleon Cloud’s KVM@TACC for provisioning three nodes and persistent storage.
 
-Unit 3 – DevOps: Terraform provisioned GPU/VM nodes. Ansible configured Kubernetes with Helm, and ArgoCD handled Helm-based continuous deployment to staging/canary/production environments.
+Unit 3 – DevOps: Terraform provisioned GPU/VM nodes. Ansible used for installation Kubernetes, and ArgoCD handled continuous deployment to staging/canary/production environments.
 
-Unit 4 – Model Training: BERT was trained on Jigsaw dataset using PyTorch with Ray multi-node orchestration and weekly retraining based on timestamp-split data.
+Unit 4 – Model Training: BERT was trained on Jigsaw dataset using PyTorch using A100 gpu.
 
-Unit 5 – MLOps Platform: MLflow managed model versions, tracked experiments, and stored metrics/artifacts in MinIO (S3-compatible).
+Unit 5 – MLOps Platform: MLflow managed model versions, tracked experiments, and stored metrics/artifacts in MinIO.
 
 Unit 6 – Serving: FastAPI container exposed a /predict endpoint. Canary/staging/production environments were created with Helm.
 
 Unit 7 – Monitoring: A simulation script streams data from production.csv to emulate real-world load. Logs and responses are tracked.
 
-Unit 8 – Data Pipeline: Docker Compose ETL system downloaded, preprocessed, split, and stored the Jigsaw dataset into object store using RClone.
+Unit 8 – Data Pipeline: Docker Compose ETL system downloaded, preprocessed, split, and loaded the Jigsaw dataset into persistent object store. Provisioned block volume to store model artifacts and logs. Wrote a script to generate send data from production set to inference endpoin, similar to what it could be expected to see in production use.
 
 #### Difficulty points attempted:
 
+Develop multiple options for serving.
+
+Monitor for data drift.
 
 #### Model serving and monitoring platforms
 
-Develop multiple options for serving.
-Monitor for data drift.
+
 
 
 
