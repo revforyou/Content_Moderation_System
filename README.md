@@ -63,7 +63,7 @@ The comments in this dataset come from an archive of the Civil Comments platform
             |
 
 
-###Planned Infrastructure
+### Planned Infrastructure
 | Resource                 | Allocation Plan                          | Justification                                                               |
 | ------------------------ | ---------------------------------------- | --------------------------------------------------------------------------- |
 | `gpu_a100`               | 6-hour blocks, 2x per week               | Needed for fast multi-GPU training runs and MLflow experiment tracking      |
