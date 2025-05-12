@@ -36,7 +36,7 @@ Latency will be less, so customer satisfaction will increase.
 |---------------------------------|-------------------------------------------------------------|------------------------------------|
 | All team members                | Design, training, cloud infrastructure, CI/CD, documentation|                                    |
 | Revanth Jyothula                | Model Training                                              |                                    |
-| Krish Panchal                   | Data Pipeline                                               |                                    |
+| Krish Panchal                   | Data Pipeline                                               |https://github.com/revforyou/Content_Moderation_System/commits/main/?author=krish9164                                   |
 | Gaurav Kuwar                    | Model Serving                                               |                                    |
 
 ### System diagram
