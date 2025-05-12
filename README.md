@@ -35,7 +35,7 @@ Latency will be less, so customer satisfaction will increase.
 | Name                            | Responsible for                                             | Link to their commits in this repo |
 |---------------------------------|-------------------------------------------------------------|------------------------------------|
 | All team members                | Design, training, cloud infrastructure, CI/CD, documentation|                                    |
-| Revanth Jyothula                | Model Training                                              |                                    |
+| Revanth Jyothula                | Model Training                                              | https://github.com/revforyou/Content_Moderation_System/commits/main/?author=revforyou                                   |
 | Krish Panchal                   | Data Pipeline                                               |https://github.com/revforyou/Content_Moderation_System/commits/main/?author=krish9164                                   |
 | Gaurav Kuwar                    | Model Serving                                               |                                    |
 
