@@ -9,7 +9,6 @@ from tqdm import tqdm
 import mlflow
 import mlflow.pytorch
 
-# Set up MLflow experiment
 mlflow.set_experiment("toxicity_classification")
 
 # Load and filter dataset
