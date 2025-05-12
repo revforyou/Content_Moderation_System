@@ -80,15 +80,49 @@ The comments in this dataset come from an archive of the Civil Comments platform
 
 #### Model training and training platforms
 
-Strategy: Fine-tune existing models (BERT base for text) on curated moderation datasets.
+Strategy:
+The project focuses on detecting toxic comments in social media using a fine-tuned transformer-based language model. It integrates real-time and batch pipelines for data ingestion, model retraining, and deployment using MLOps best practices. We simulate production traffic to mimic a live environment, ensuring a realistic model deployment and feedback loop. The model is retrained weekly using the latest labeled and production data, with versioning and promotion handled via Argo Workflows and MLflow.
 
-Diagram section: Training scripts → ONNX converter → model registry.
+Relevant Parts of the Diagram:
 
-Platform: Chameleon Cloud w/ gpu_a100 for training.
+Model Training & Retraining: Scheduled weekly using Ray and tracked via MLflow
+ETL Pipeline: Docker Compose-based ingestion and transformation into object store
+Model Registry: MLflow + MinIO used for artifact management and alias tagging
+CI/CD Deployment: Argo Workflows automate container image build, test, and Helm-based rollout to staging/canary/production
+Serving: Inference API served on Kubernetes via FastAPI container
+Online Data Simulation: Python script streams production.csv to the REST endpoint
+Monitoring & Feedback Loop: Production predictions can be routed for re-labeling and used in retraining
 
-Justification: Reduces compute cost by leveraging transfer learning.
+Justification for Strategy:
 
-MLOps link: Use MLflow to track experiments, metrics, and versions.
+Transformer Model (e.g., BERT): Well-suited for text classification; handles large-scale social media data
+ETL with Docker Compose: Easy reproducibility and encapsulation of extract-transform-load steps
+Object Store (MinIO via RClone): Efficient persistent storage accessible across nodes and workflows
+MLflow for Experiment Tracking: Provides audit trails and comparison across model versions
+Argo Workflows: Modular, repeatable automation for training, promotion, and deployment
+Ray Train: Enables multi-node distributed training with built-in fault tolerance
+Canary + Staging + Prod: Follows industry-standard CI/CD for safe deployment transitions
+
+Unit 2: Cloud Computing
+All infrastructure runs on Chameleon Cloud. We used KVM@TACC for provisioning virtual machines and object storage. Our pipeline is built to be cloud-native with persistent storage, containerized services, and scalable compute resources.
+
+Unit 3: DevOps
+We used Terraform to define infrastructure-as-code and automate the provisioning of four nodes (GPU training, GPU inference, data pipeline, monitoring). Ansible was used for pre/post Kubernetes configuration, and ArgoCD managed staged deployment (staging, canary, production). Helm was used for templating Kubernetes manifests.
+
+Unit 4: Model Training at Scale
+Our classification model (based on toxic comment detection) is trained using Ray on a multi-node cluster. Training jobs are submitted with support for checkpointing and weekly retraining to adapt to new data.
+
+Unit 5: Model Training Infrastructure & Platform
+We deployed MLflow for experiment tracking and model versioning. It uses MinIO (S3-compatible object store) for artifact storage and PostgreSQL as the backend store. MLflow records metrics, parameters, and model versions.
+
+Unit 6: Model Serving
+The trained model is exposed via a REST API using FastAPI, served as a containerized app across staging, canary, and production environments using Kubernetes. We defined latency and concurrency targets based on simulated production loads.
+
+Unit 7: Evaluation and Monitoring
+We implemented a feedback loop using a Python script to simulate online user traffic from timestamp-sorted production data. This simulated stream mimics real-world requests and sends them to the API endpoint. Data is logged and stored for later retraining.
+
+Unit 8: Data Pipeline & Persistent Storage
+We created an ETL pipeline using Docker Compose to extract data from Kaggle, transform and split it by timestamp, and load it into Chameleon object store via RClone. Data is mounted read-only for use in multiple services, reducing duplication and speeding up access.
 
 #### Difficulty points attempted:
 
