@@ -137,7 +137,9 @@ Monitor for data drift.
 
 #### Data pipeline
 
-In the data_pipeline part of our project, we built a full ETL (Extract, Transform, Load) pipeline to handle the Jigsaw toxicity dataset. Using Docker Compose, we automated downloading the dataset from Kaggle, transforming it by splitting into train/val/production sets using timestamps, and uploading it to Chameleon’s object store using rclone. This object store was then mounted as a virtual file system on our compute nodes, allowing all services (like training or inference) to access the latest data without duplication. The pipeline is reproducible and portable, making it easy to rerun or scale as needed.
+In the data_pipeline part of our project, we built a full ETL (Extract, Transform, Load) pipeline to handle the Jigsaw toxicity dataset. Using Docker Compose, we automated downloading the dataset from Kaggle, transforming it by splitting into train/val/production sets using timestamps, and uploading it to Chameleon’s object store using rclone. This object store was then mounted as a virtual file system on our compute nodes, allowing all services (like training or inference) to access the latest data without duplication. The pipeline is reproducible and portable, making it easy to rerun or scale as needed. 
+
+We cleaned and prepared the dataset by combining individual annotations using the most common label (mode). Unwanted columns were removed, and missing values were filled—strings with "none" and numbers with 0. We also fixed date formats and sorted the data by time. Then, we split it into training (90%) and validation (10%) based on the latest timestamps to reflect a real-world scenario. 
 
 
 #### Continuous X
