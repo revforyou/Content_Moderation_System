@@ -115,7 +115,7 @@ def train(args):
 # ========== Entry Point ==========
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data_path', type=str, default="train_clean.csv", help="Path to training CSV file")
+    parser.add_argument('--data_path', type=str, default="train.csv", help="Path to training CSV file")
     parser.add_argument('--output_dir', type=str, default=".", help="Directory to save model")
     args = parser.parse_args()
 
