@@ -44,7 +44,7 @@ services:
     image: python:3.11
     volumes:
       - jigsaw_data:/data
-      - ../scripts/split_by_timestamp.py:/data/Jigsaw/split_by_timestamp.py:ro
+      - ../scripts/preprocessing.py:/data/Jigsaw/split_by_timestamp.py:ro
     working_dir: /data/Jigsaw
     command:
       - bash
@@ -53,10 +53,10 @@ services:
         set -e
         pip install pandas scikit-learn
 
-        echo "Running timestamp-based split script..."
-        python3 split_by_timestamp.py
+        echo "Running preprocessing script..."
+        python3 preprocessing.py
 
-        echo "Done splitting. Final files:"
+        echo "Done transform. Final files:"
         ls -l
 
   load-data:
