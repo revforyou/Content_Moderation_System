@@ -52,10 +52,10 @@ conditions under which it may be used. -->
 
 |                     | How it was created                                                                                                                                                  | Conditions of use                 |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| Training Dataset    | Subset of Jigsaw toxicity dataset (`train.csv`) with `target > 0` (toxic) and `target == 0` (non-toxic); includes subtype labels like `insult`, `obscene`, `threat`,`sexual_explicit` and so on  | Public dataset, CC BY 4.0 license |
-| Validation Dataset  | Random 10% split by timestamp from the training dataset for evaluation                                                                                                        | Same as above                     |
+| Training Dataset    | Subset of Jigsaw toxicity dataset (`train.csv`) with `target > 0` (toxic) and `target == 0` (non-toxic); includes subtype labels like `insult`, `obscene`, `threat`, `sexual_explicit` and so on  | Public dataset, CC BY 4.0 license |
+| Production Dataset  | 10% split by latest timestamp from the training dataset for evaluation                                                                                                        | Same as above                     |
 | Test Dataset        | `test.csv` from Jigsaw competition (comments without labels); optionally `test_public_expanded.csv` for labeled test results                                        | Public dataset, CC BY 4.0 license |
-| Base model 1 (Text) | BERT-base (uncased) fine-tuned on training dataset for binary (toxic/non-toxic) and multi-label subtype classification                                              | Custom Implmentation |
+| Base model 1 (Text) | BERT-base (uncased) fine-tuned on training dataset for binary (toxic/non-toxic) and multi-label subtype classification                                              | Custom Implementation |
             |
 
 
