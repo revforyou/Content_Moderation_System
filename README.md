@@ -1,7 +1,7 @@
 ## Smart AI-Based Content Moderation System
 
 #### Value Proposition
-Content moderation is a critical requirement for businesses that operate online platforms such as social media platforms, e-commerce marketplaces, discussion forums, and video-sharing platforms. These businesses ensure that harmful, offensive, or illegal content is not published, thereby maintaining compliance with policies, protecting users, and preventing reputational damage. 
+Content moderation is a critical requirement for businesses that operate online platforms such as social media platforms, e-commerce marketplaces, discussion forums, and video-sharing platforms. These businesses ensure that harmful, offensive, or illegal content is not published, thereby maintaining compliance with policies, protecting users, and preventing reputational damage. A main area of focus our machine learning system that can identify toxicity in online conversations, where toxicity is defined as obscene, threatning, insulting, identity attack or sexually explicit
 
 #### Current Status Quo (Non-ML Solution)
 Many companies still rely on manual moderation teams or rule-based automated filters to monitor and flag inappropriate content. However, these approaches face several challenges:
