@@ -50,6 +50,10 @@ Latency will be less, so customer satisfaction will increase.
 Name of data/model, conditions under which it was created (ideally with links/references), 
 conditions under which it may be used. -->
 
+https://www.kaggle.com/competitions/jigsaw-unintended-bias-in-toxicity-classification/data
+
+The comments in this dataset come from an archive of the Civil Comments platform, a commenting plugin for independent news sites. These public comments were created from 2015 - 2017 and appeared on approximately 50 English-language news sites across the world. When Civil Comments shut down in 2017, they chose to make the public comments available in a lasting open archive to enable future research. The original data, published on figshare, includes the public comment text, some associated metadata such as article IDs, timestamps and commenter-generated "civility" labels, but does not include user ids. Jigsaw extended this dataset by adding additional labels for toxicity and identity mentions.
+
 |                     | How it was created                                                                                                                                                  | Conditions of use                 |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
 | Training Dataset    | Subset of Jigsaw toxicity dataset (`train.csv`) with `target > 0` (toxic) and `target == 0` (non-toxic); includes subtype labels like `insult`, `obscene`, `threat`, `sexual_explicit` and so on  | Public dataset, CC BY 4.0 license |
