@@ -18,8 +18,7 @@ Our AI-powered Content Moderation System leverages Deep Learning & NLP to automa
 Scalability – Can handle millions of content pieces in real time.
 Consistency – This removes human bias from decision-making.
 Faster Response Time – Immediate flagging of harmful content.
-Adaptive Learning – Model continuously improves using feedback from moderators.
-Multi-Modal Analysis – Supports text, image, and video content moderation.
+Adaptive Learning – Model continuously improves using new input data.
 
 This system is designed to be cloud-native, scalable, and compliant with content policies, making it ideal for social media platforms, online forums, and enterprise collaboration tools.
 
