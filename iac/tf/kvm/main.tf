@@ -1,9 +1,9 @@
-resource "openstack_objectstorage_container_v1" "object-persist-project26" {
+resource "openstack_objectstorage_container_v1" "persist_container" {
   name = "object-persist-project26"
-  content_type = "application/json"
   metadata = {
-    environment = "mlops"
-    usage       = "training-artifacts"
+    project     = "content-moderation"
+    environment = "production"
+    purpose     = "training-and-retraining"
   }
 }
 
