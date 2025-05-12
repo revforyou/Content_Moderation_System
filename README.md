@@ -46,7 +46,17 @@ Improve moderation latency (increase user satisfaction)
 
 <pre> ``` [Raw Dataset (Kaggle: Jigsaw + Annotations)] ↓ [Offline Data Pipeline (ETL: Pandas + Cleaning + Aggregation)] ↓ [Train/Val Split + Timestamp Ordering] ↓ [Model Training (BERT)] ↓ [Model Registry (MLflow + MinIO)] ↓ [Container Build (ONNX + Kaniko via Argo Workflows)] ↓ [Staged Deployment (ArgoCD + Helm: Staging → Canary → Prod)] ↓ [Inference API (FastAPI + ONNXRuntime)] ↑ [Simulated Production Requests (Python Script)] ↑ [Monitoring & Logging (Prometheus + Grafana)] ↑ [MLflow Feedback Loop for Weekly Retraining] ``` </pre>
 
-
+[User Input: Event Calendar, Taxi Trip History]
+        ↓
+[Preprocessing Pipeline (ETL)]
+        ↓
+[Demand Forecasting Model API (FastAPI)]
+        ↓
+[Visualization Dashboard (Grafana/Streamlit)]
+        ↕
+[Monitoring & Logging]
+        ↕
+[MLflow Tracking / Feedback Loop]
 
 
 ### Summary of outside materials
