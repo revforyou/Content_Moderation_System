@@ -1,3 +1,12 @@
+resource "openstack_objectstorage_container_v1" "object-persist-project26" {
+  name = "object-persist-project26"
+  content_type = "application/json"
+  metadata = {
+    environment = "mlops"
+    usage       = "training-artifacts"
+  }
+}
+
 resource "openstack_networking_network_v2" "private_net" {
   name                  = "private-net-mlops-${var.suffix}"
   port_security_enabled = false
