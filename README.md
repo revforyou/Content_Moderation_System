@@ -50,12 +50,14 @@ Latency will be less, so customer satisfaction will increase.
 Name of data/model, conditions under which it was created (ideally with links/references), 
 conditions under which it may be used. -->
 
-|                             | How it was created                                                  | Conditions of use |
-|-----------------------------|---------------------------------------------------------------------|-------------------|
-| Data set 1                  | Human-labeled dataset of hate speech and offensive text             |                   |
-| Data set 2                  | Human-labeled dataset of normal speech and normal text              |                   |
-| Base model 1 (Text)         | DistilBERT fine-tuned on hate/offensive data and normal data        |                   |
-| Base model 2 (Text)         | LSTM modeled and fine-tuned on hate/offensive data and normal data |                   |
+|                     | How it was created                                                                                                                                                  | Conditions of use                 |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| Training Dataset    | Subset of Jigsaw toxicity dataset (`train.csv`) with `target > 0` (toxic) and `target == 0` (non-toxic); includes subtype labels like `insult`, `obscene`, `threat`,`sexual_explicit` and so on  | Public dataset, CC BY 4.0 license |
+| Validation Dataset  | Random 10% split by timestamp from the training dataset for evaluation                                                                                                        | Same as above                     |
+| Test Dataset        | `test.csv` from Jigsaw competition (comments without labels); optionally `test_public_expanded.csv` for labeled test results                                        | Public dataset, CC BY 4.0 license |
+| Base model 1 (Text) | BERT-base (uncased) fine-tuned on training dataset for binary (toxic/non-toxic) and multi-label subtype classification                                              | Custom Implmentation |
+            |
+
 
 
 ### Planned Infrastructure Requirements  
