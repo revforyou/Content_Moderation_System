@@ -122,15 +122,8 @@ Unit 8 – Data Pipeline: Docker Compose ETL system downloaded, preprocessed, sp
 
 #### Model serving and monitoring platforms
 
-Strategy: Serve ONNX models using FastAPI + onnxruntime in lightweight containers.
-
-Diagram section: Serving pods, API Gateway, Prometheus integration.
-
-Justification: It ensures modularity, minimal latency, and GPU-optional inference.
-
-Platform: Chameleon m1.medium VMs + Docker + ArgoCD for deployment.
-
-Monitoring: Prometheus + Grafana dashboards; logs collected with Loki.
+Develop multiple options for serving.
+Monitor for data drift.
 
 
 
