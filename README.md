@@ -44,6 +44,24 @@ Improve moderation latency (increase user satisfaction)
 
 ### System diagram
 
+[Raw Dataset (Kaggle: Jigsaw + Annotations)]
+        ↓
+[Offline Data Pipeline (ETL: Pandas + Preprocessing)]
+        ↓
+[Train/Val Split + Aggregated Labels + Timestamp Sort]
+        ↓
+[Model Training (BERT-based)]
+        ↓
+[Model Registry (MLflow + MinIO)]
+        ↓
+[Staged Deployment (Kubernetes + Ansible+ ArgoCD: Staging → Canary → Prod)]
+        ↓
+[Model Inference API (FastAPI)]
+        ↕
+[Simulated Online Requests]
+        ↕
+[MLflow Feedback Loop for Weekly Retraining]
+
 
 
 
