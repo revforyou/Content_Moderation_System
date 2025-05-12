@@ -59,17 +59,15 @@ conditions under which it may be used. -->
             |
 
 
+###Planned Infrastructure
+| Resource                 | Allocation Plan                          | Justification                                                               |
+| ------------------------ | ---------------------------------------- | --------------------------------------------------------------------------- |
+| `gpu_a100`               | 6-hour blocks, 2x per week               | Needed for fast multi-GPU training runs and MLflow experiment tracking      |
+| `gpu_mi100`              | On-demand, during model evaluation phase | Cost-effective resource for real-time inference and model testing           |
+| `m1.medium` VMs          | 3 VMs for full project duration          | Dedicated roles: (1) Data Pipeline, (2) Evaluation Scripts, (3) |
+| Floating IPs (2x)        | Throughout project                       | (1) Access CHI\@TACC GPU training nodes, (2) Serve from KVM\@TACC endpoints |
+| Persistent Volume (10GB) | Entire duration                          | Stores datasets, model checkpoints, training logs, and MLflow artifacts     |
 
-### Planned Infrastructure Requirements  
-
-| Requirement       | How many/when                                     | Justification |
-|------------------|---------------------------------------------------|---------------|
-| `gpu_a100`      | 6-hour block, 3x per week              | High-speed training for models  and Mlflow|
-
-| `gpu_mi100`        |                             | Cost-effective real-time inference serving |
-| `m1.medium` VMs  | 3 for entire project duration                     | 1 for Data Pipeline, 1 for Evaluation, 1 for Serving) |
-| Floating IPs 2x   | entire project duration | 1 for CHI@TACC (GPU Instances), 1 for KVM@TACC
-| Persistent Volume (10GB) | Full duration                          | Stores training data, logs, model artifacts from MLflow) |
 
 
 
