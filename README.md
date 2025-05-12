@@ -1,7 +1,7 @@
 ## Smart AI-Based Content Moderation System
 
 #### Value Proposition
-Content moderation is a critical requirement for businesses that operate online platforms such as social media platforms, e-commerce marketplaces, discussion forums, and video-sharing platforms. These businesses ensure that harmful, offensive, or illegal content is not published, thereby maintaining compliance with policies, protecting users, and preventing reputational damage. A main area of focus our machine learning system that can identify toxicity in online conversations, where toxicity is defined as obscene, threatning, insulting, identity attack or sexually explicit
+Content moderation is a critical requirement for businesses that operate online platforms such as social media platforms, e-commerce marketplaces, discussion forums, and video-sharing platforms. These businesses ensure that harmful, offensive, or illegal content is not published, thereby maintaining compliance with policies, protecting users, and preventing reputational damage. A main area of focus our machine learning system that can identify toxicity in online conversations, where toxicity is defined as obscene, threatning, insulting, identity attack or sexually explicit. Our target customer is Twitter.
 
 #### Current Status Quo (Non-ML Solution)
 Many companies still rely on manual moderation teams or rule-based automated filters to monitor and flag inappropriate content. However, these approaches face several challenges:
@@ -15,9 +15,13 @@ Many companies still rely on manual moderation teams or rule-based automated fil
 4. Limited adaptability – Rule-based systems struggle with new types of harmful content, requiring constant manual updates.
 
 Our AI-powered Content Moderation System leverages Deep Learning & NLP to automate moderation on text, ensuring:
+
 Scalability – Can handle millions of content pieces in real time.
+
 Consistency – This removes human bias from decision-making.
+
 Faster Response Time – Immediate flagging of harmful content.
+
 Adaptive Learning – Model continuously improves using new input data.
 
 This system is designed to be cloud-native, scalable, and compliant with content policies, making it ideal for social media platforms, online forums, and enterprise collaboration tools.
