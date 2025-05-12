@@ -39,7 +39,7 @@ Improve moderation latency (increase user satisfaction)
 
 ### System diagram
 
-![image](https://github.com/user-attachments/assets/462df420-26af-4b75-b763-0a049bccd2d8)
+
 
 
 ### Summary of outside materials
