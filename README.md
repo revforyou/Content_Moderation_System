@@ -64,21 +64,21 @@ conditions under which it may be used. -->
 
 | Requirement       | How many/when                                     | Justification |
 |------------------|---------------------------------------------------|---------------|
-| `gpu_a100`      | 4-hour block, 3x per week              | High-speed training for text/image models (DistilBERT & MobileNetV2) with ONNX export |
-| `gpu_v100`      | 8-hour block, 2x per week             | Fine-tuning and inference benchmarking before deployment |
-| `gpu_t4`        | Always-on, 1 instance                             | Cost-effective real-time inference serving |
-| `m1.large` VMs  | 3 for entire project duration                     | API gateway, ONNX model serving, monitoring stack (Prometheus, Grafana, Loki) |
-| Floating IPs    | 1 for entire project duration, 1 for sporadic use | Main service access and staging deployments |
-| Persistent Volume (50GB) | Full duration                          | Stores training data, logs, model artifacts (MinIO for dataset versioning) |
-| Chameleon Blazar Reservations | As needed for scheduled GPU usage | Ensures compute availability for large batch training jobs |
-| Kubernetes Cluster (3 nodes) | Full duration                        | Containerized inference deployment with ArgoCD for autoscaling |
+| `gpu_a100`      | 6-hour block, 3x per week              | High-speed training for models  and Mlflow|
+
+| `gpu_mi100`        |                             | Cost-effective real-time inference serving |
+| `m1.medium` VMs  | 3 for entire project duration                     | 1 for Data Pipeline, 1 for Evaluation, 1 for Serving) |
+| Floating IPs 2x   | entire project duration | 1 for CHI@TACC (GPU Instances), 1 for KVM@TACC
+| Persistent Volume (10GB) | Full duration                          | Stores training data, logs, model artifacts from MLflow) |
+
+
 
 
 ### Detailed design plan
 
 #### Model training and training platforms
 
-Strategy: Fine-tune existing models (DistilBERT for text, MobileNetV2 for image) on curated moderation datasets.
+Strategy: Fine-tune existing models (BERT base for text) on curated moderation datasets.
 
 Diagram section: Training scripts → ONNX converter → model registry.
 
