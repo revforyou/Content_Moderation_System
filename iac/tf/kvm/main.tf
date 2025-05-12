@@ -17,6 +17,11 @@ resource "openstack_blockstorage_volume_v3" "mlops_volume" {
   }
 }
 
+resource "openstack_compute_volume_attach_v2" "attach_volume_to_node1" {
+  instance_id = openstack_compute_instance_v2.nodes["node1"].id
+  volume_id   = openstack_blockstorage_volume_v3.mlops_volume.id
+}
+
 
 resource "openstack_networking_network_v2" "private_net" {
   name                  = "private-net-mlops-${var.suffix}"
