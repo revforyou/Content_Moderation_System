@@ -44,7 +44,16 @@ Improve moderation latency (increase user satisfaction)
 
 ### System diagram
 
-<pre> ``` [Raw Dataset (Kaggle: Jigsaw + Annotations)] ↓ [Offline Data Pipeline (ETL: Pandas + Cleaning + Aggregation)] ↓ [Train/Val Split + Timestamp Ordering] ↓ [Model Training (BERT)] ↓ [Model Registry (MLflow + MinIO)] ↓ [Container Build (ONNX + Kaniko via Argo Workflows)] ↓ [Staged Deployment (ArgoCD + Helm: Staging → Canary → Prod)] ↓ [Inference API (FastAPI + ONNXRuntime)] ↑ [Simulated Production Requests (Python Script)] ↑ [Monitoring & Logging (Prometheus + Grafana)] ↑ [MLflow Feedback Loop for Weekly Retraining] ``` </pre>
+<pre> ``` [Raw Dataset (Kaggle: Jigsaw + Annotations)] ↓ 
+            [Offline Data Pipeline (ETL: Pandas + Cleaning + Aggregation)] ↓ 
+            [Train/Val Split + Timestamp Ordering] ↓ 
+            [Model Training (BERT)] ↓ 
+            [Model Registry (MLflow + MinIO)]  ↓ 
+            [Staged Deployment (ArgoCD + Helm: Staging → Canary → Prod)] ↓ 
+            [Inference API (FastAPI + ONNXRuntime)] ↑ 
+            [Simulated Production Requests (Python Script)] ↑ 
+            [Monitoring & Logging (Prometheus + Grafana)] ↑ 
+            [MLflow Feedback Loop for Weekly Retraining] ``` </pre>
 
 
 
