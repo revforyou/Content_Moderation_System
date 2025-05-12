@@ -14,7 +14,7 @@ Many companies still rely on manual moderation teams or rule-based automated fil
 
 4. Limited adaptability – Rule-based systems struggle with new types of harmful content, requiring constant manual updates.
 
-Our AI-powered Content Moderation System leverages Deep Learning & NLP to automate moderation across text, images, and videos, ensuring:
+Our AI-powered Content Moderation System leverages Deep Learning & NLP to automate moderation on text, ensuring:
 Scalability – Can handle millions of content pieces in real time.
 Consistency – This removes human bias from decision-making.
 Faster Response Time – Immediate flagging of harmful content.
