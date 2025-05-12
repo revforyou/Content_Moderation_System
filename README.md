@@ -110,7 +110,7 @@ Unit 3: DevOps
 We used Terraform to define infrastructure-as-code and automate the provisioning of four nodes (GPU training, GPU inference, data pipeline, monitoring). Ansible was used for pre/post Kubernetes configuration, and ArgoCD managed staged deployment (staging, canary, production). Helm was used for templating Kubernetes manifests.
 
 Unit 4: Model Training at Scale
-Our classification model (based on toxic comment detection) is trained using Ray on a multi-node cluster. Training jobs are submitted with support for checkpointing and weekly retraining to adapt to new data.
+Our classification model (based on toxic comment detection) was trained on a A100 NVIDIA GPU. Used object store (e.g., S3 or persistent volume) to load/save datasets.
 
 Unit 5: Model Training Infrastructure & Platform
 We deployed MLflow for experiment tracking and model versioning. It uses MinIO (S3-compatible object store) for artifact storage and PostgreSQL as the backend store. MLflow records metrics, parameters, and model versions.
@@ -126,9 +126,6 @@ We created an ETL pipeline using Docker Compose to extract data from Kaggle, tra
 
 #### Difficulty points attempted:
 
-Use of multiple model types (text + vision).
-
-Conversion to ONNX for cross-platform serving
 
 #### Model serving and monitoring platforms
 
