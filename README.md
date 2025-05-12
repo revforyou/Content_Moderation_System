@@ -157,16 +157,6 @@ Data reuse for retraining/evaluation cycles.
 
 #### Continuous X
 
-Strategy:
-
-CI: GitHub Actions runs model tests, ONNX conversion, and image builds.
-
-CD: ArgoCD triggers deployment on Chameleon after model pass.
-
-Monitoring: Slack notifications on model failure or deploy failure.
-
-Diagram section: CI/CD box + integration with version control.
-
-Justification: It promotes automation and reproducibility.
+We automated our machine learning system's setup and deployment using tools like Terraform, Ansible, Helm, ArgoCD, and Argo Workflows. We used Terraform to create four virtual machines (for training, inference, data pipeline, and monitoring), and Ansible to install Kubernetes and important tools like MLflow and ArgoCD. Helm helped us define how our app should run on Kubernetes. With ArgoCD, any changes pushed to Git were automatically deployed to staging, canary, and production environments. Argo Workflows managed tasks like training, building Docker images, and promoting the model to production. This setup helped us deploy and update the system easily, reliably, and in a repeatable way.
 
 
