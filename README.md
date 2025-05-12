@@ -103,26 +103,21 @@ Argo Workflows: Modular, repeatable automation for training, promotion, and depl
 Ray Train: Enables multi-node distributed training with built-in fault tolerance
 Canary + Staging + Prod: Follows industry-standard CI/CD for safe deployment transitions
 
-Unit 2: Cloud Computing
-All infrastructure runs on Chameleon Cloud. We used KVM@TACC for provisioning virtual machines and object storage. Our pipeline is built to be cloud-native with persistent storage, containerized services, and scalable compute resources.
+Unit 1: 
 
-Unit 3: DevOps
-We used Terraform to define infrastructure-as-code and automate the provisioning of four nodes (GPU training, GPU inference, data pipeline, monitoring). Ansible was used for pre/post Kubernetes configuration, and ArgoCD managed staged deployment (staging, canary, production). Helm was used for templating Kubernetes manifests.
+Unit 2 – Cloud Computing: We used Chameleon Cloud’s KVM@TACC for provisioning four nodes and persistent volumes. Object store was accessed via RClone.
 
-Unit 4: Model Training at Scale
-Our classification model (based on toxic comment detection) was trained on a A100 NVIDIA GPU. Used object store (e.g., S3 or persistent volume) to load/save datasets.
+Unit 3 – DevOps: Terraform provisioned GPU/VM nodes. Ansible configured Kubernetes with Helm, and ArgoCD handled Helm-based continuous deployment to staging/canary/production environments.
 
-Unit 5: Model Training Infrastructure & Platform
-We deployed MLflow for experiment tracking and model versioning. It uses MinIO (S3-compatible object store) for artifact storage and PostgreSQL as the backend store. MLflow records metrics, parameters, and model versions.
+Unit 4 – Model Training: BERT was trained on Jigsaw dataset using PyTorch with Ray multi-node orchestration and weekly retraining based on timestamp-split data.
 
-Unit 6: Model Serving
-The trained model is exposed via a REST API using FastAPI, served as a containerized app across staging, canary, and production environments using Kubernetes. We defined latency and concurrency targets based on simulated production loads.
+Unit 5 – MLOps Platform: MLflow managed model versions, tracked experiments, and stored metrics/artifacts in MinIO (S3-compatible).
 
-Unit 7: Evaluation and Monitoring
-We implemented a feedback loop using a Python script to simulate online user traffic from timestamp-sorted production data. This simulated stream mimics real-world requests and sends them to the API endpoint. Data is logged and stored for later retraining.
+Unit 6 – Serving: FastAPI container exposed a /predict endpoint. Canary/staging/production environments were created with Helm.
 
-Unit 8: Data Pipeline & Persistent Storage
-We created an ETL pipeline using Docker Compose to extract data from Kaggle, transform and split it by timestamp, and load it into Chameleon object store via RClone. Data is mounted read-only for use in multiple services, reducing duplication and speeding up access.
+Unit 7 – Monitoring: A simulation script streams data from production.csv to emulate real-world load. Logs and responses are tracked.
+
+Unit 8 – Data Pipeline: Docker Compose ETL system downloaded, preprocessed, split, and stored the Jigsaw dataset into object store using RClone.
 
 #### Difficulty points attempted:
 
