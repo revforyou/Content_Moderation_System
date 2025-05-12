@@ -137,18 +137,16 @@ Monitor for data drift.
 
 #### Data pipeline
 
-Strategy:
-
 In the data_pipeline part of our project, we built a full ETL (Extract, Transform, Load) pipeline to handle the Jigsaw toxicity dataset. Using Docker Compose, we automated downloading the dataset from Kaggle, transforming it by splitting into train/val/production sets using timestamps, and uploading it to Chameleon’s object store using rclone. This object store was then mounted as a virtual file system on our compute nodes, allowing all services (like training or inference) to access the latest data without duplication. The pipeline is reproducible and portable, making it easy to rerun or scale as needed.
 
-#### Difficulty points attempted:
-
-Intermediate data staging in pipeline.
-
-Data reuse for retraining/evaluation cycles.
 
 #### Continuous X
 
 We automated our machine learning system's setup and deployment using tools like Terraform, Ansible, Helm, ArgoCD, and Argo Workflows. We used Terraform to create four virtual machines (for training, inference, data pipeline, and monitoring), and Ansible to install Kubernetes and important tools like MLflow and ArgoCD. Helm helped us define how our app should run on Kubernetes. With ArgoCD, any changes pushed to Git were automatically deployed to staging, canary, and production environments. Argo Workflows managed tasks like training, building Docker images, and promoting the model to production. This setup helped us deploy and update the system easily, reliably, and in a repeatable way.
 
 
+#### Difficulty points attempted:
+
+Intermediate data staging in pipeline.
+
+Data reuse for retraining/evaluation cycles.
