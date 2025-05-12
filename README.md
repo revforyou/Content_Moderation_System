@@ -23,11 +23,9 @@ Adaptive Learning – Model continuously improves using new input data.
 This system is designed to be cloud-native, scalable, and compliant with content policies, making it ideal for social media platforms, online forums, and enterprise collaboration tools.
 
 #### Business Metrics
-We will be judged on:
 
-The hiring budget required for content moderation will go down.
-
-Latency will be less, so customer satisfaction will increase.
+Reduce moderation team size (cost savings)
+Improve moderation latency (increase user satisfaction)
 
 
 ### Contributors
