@@ -139,15 +139,7 @@ Monitor for data drift.
 
 Strategy:
 
-Store incoming moderation requests in PostgreSQL.
-
-Store training datasets in MinIO buckets (S3-compatible).
-
-Use data versioning tools (DVC, optionally).
-
-Diagram section: Ingest pipeline → storage → model trainer.
-
-Justification: Enables retraining pipelines + audit trails.
+In the data_pipeline part of our project, we built a full ETL (Extract, Transform, Load) pipeline to handle the Jigsaw toxicity dataset. Using Docker Compose, we automated downloading the dataset from Kaggle, transforming it by splitting into train/val/production sets using timestamps, and uploading it to Chameleon’s object store using rclone. This object store was then mounted as a virtual file system on our compute nodes, allowing all services (like training or inference) to access the latest data without duplication. The pipeline is reproducible and portable, making it easy to rerun or scale as needed.
 
 #### Difficulty points attempted:
 
