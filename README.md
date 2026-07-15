@@ -1,5 +1,7 @@
 ## Smart AI-Based Content Moderation System
 
+![Architecture](docs/architecture.svg)
+
 #### Value Proposition
 Content moderation is a critical requirement for businesses that operate online platforms such as social media platforms, e-commerce marketplaces, discussion forums, and video-sharing platforms. These businesses ensure that harmful, offensive, or illegal content is not published, thereby maintaining compliance with policies, protecting users, and preventing reputational damage. A main area of focus our machine learning system that can identify toxicity in online conversations, where toxicity is defined as obscene, threatning, insulting, identity attack or sexually explicit. Our target customer is Twitter.
 
